@@ -24,7 +24,7 @@ namespace API.Controllers
         [HttpGet("")]
         public async Task<ActionResult<IList<CandidateViwModel>>> GetAllCandidatesAysinc()
         {
-            var candidates = _candidateService.GetCandidatesAsync();
+            var candidates = await _candidateService.GetCandidatesAsync();
 
             var result = _mapper.Map<IList<CandidateViwModel>>(candidates);
 

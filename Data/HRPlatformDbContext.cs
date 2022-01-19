@@ -8,7 +8,7 @@ namespace Data
     {
         public DbSet<Candidate> Candidates { get; set; }
         public DbSet<Skill> Skills { get; set; }
-        public DbSet<CandidateSkill> candidateSkills { get; set; }
+        public DbSet<CandidateSkill> CandidateSkills { get; set; }
 
 
         public HRPlatformDbContext( DbContextOptions options) : base(options)

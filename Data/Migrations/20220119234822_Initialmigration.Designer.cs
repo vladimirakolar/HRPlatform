@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Data.Migrations
 {
     [DbContext(typeof(HRPlatformDbContext))]
-    [Migration("20220119220131_Initialmigration")]
+    [Migration("20220119234822_Initialmigration")]
     partial class Initialmigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -57,7 +57,7 @@ namespace Data.Migrations
 
                     b.HasIndex("SkillId");
 
-                    b.ToTable("candidateSkills");
+                    b.ToTable("CandidateSkills");
                 });
 
             modelBuilder.Entity("Core.Entities.Skill", b =>

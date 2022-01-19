@@ -55,7 +55,7 @@ namespace Data.Migrations
 
                     b.HasIndex("SkillId");
 
-                    b.ToTable("candidateSkills");
+                    b.ToTable("CandidateSkills");
                 });
 
             modelBuilder.Entity("Core.Entities.Skill", b =>

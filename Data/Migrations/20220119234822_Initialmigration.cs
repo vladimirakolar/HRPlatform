@@ -37,7 +37,7 @@ namespace Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "candidateSkills",
+                name: "CandidateSkills",
                 columns: table => new
                 {
                     CandidateId = table.Column<int>(type: "INTEGER", nullable: false),
@@ -45,15 +45,15 @@ namespace Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_candidateSkills", x => new { x.CandidateId, x.SkillId });
+                    table.PrimaryKey("PK_CandidateSkills", x => new { x.CandidateId, x.SkillId });
                     table.ForeignKey(
-                        name: "FK_candidateSkills_Candidates_CandidateId",
+                        name: "FK_CandidateSkills_Candidates_CandidateId",
                         column: x => x.CandidateId,
                         principalTable: "Candidates",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_candidateSkills_Skills_SkillId",
+                        name: "FK_CandidateSkills_Skills_SkillId",
                         column: x => x.SkillId,
                         principalTable: "Skills",
                         principalColumn: "Id",
@@ -61,15 +61,15 @@ namespace Data.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_candidateSkills_SkillId",
-                table: "candidateSkills",
+                name: "IX_CandidateSkills_SkillId",
+                table: "CandidateSkills",
                 column: "SkillId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "candidateSkills");
+                name: "CandidateSkills");
 
             migrationBuilder.DropTable(
                 name: "Candidates");
