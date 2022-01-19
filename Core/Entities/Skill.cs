@@ -8,11 +8,11 @@ namespace Core.Entities
 
         public Skill()
         {
-            Candidates = new List<Candidate>();
+           
         }
 
         public string Name { get; set; }
 
-        public IList<Candidate> Candidates { get; set; }
+        public IList<CandidateSkill> CandidateSkill { get; set; }
     }
 }

@@ -9,7 +9,7 @@ namespace Core.Entities
 
         public Candidate()
         {
-            Skills = new List<Skill>();
+        
         }
 
         public string Name { get; set; }
@@ -20,6 +20,6 @@ namespace Core.Entities
 
         public string Email { get; set; }
 
-        public IList<Skill> Skills { get; set; }
+        public IList<CandidateSkill> CandidateSkill { get; set; }
     }
 }
