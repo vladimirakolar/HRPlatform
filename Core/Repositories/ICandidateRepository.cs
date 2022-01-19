@@ -9,8 +9,8 @@ namespace Core.Repositories
 {
     public interface ICandidateRepository
     {
-        Task<Candidate> GetCandidateById(int id);
-        Task<IList<Candidate>> GetCandidates();
+        Task<Candidate> GetCandidateByIdAsync(int id);
+        Task<IList<Candidate>> GetCandidatesAsync();
 
     }
 }

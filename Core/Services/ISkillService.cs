@@ -9,8 +9,8 @@ namespace Core.Services
 {
     public interface ISkillService
     {
-        Task<Skill> GetSkill(int id);
-        Task<IList<Skill>> GetSkills(); 
+        Task<Skill> GetSkillAsync(int id);
+        Task<IList<Skill>> GetSkillsAsync(); 
 
     }
 }
