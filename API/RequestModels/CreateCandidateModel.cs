@@ -2,7 +2,7 @@
 
 namespace API.RequestModels
 {
-    public class CreatCandidateModel
+    public class CreateCandidateModel
     {
 
         public string Name { get; set; }

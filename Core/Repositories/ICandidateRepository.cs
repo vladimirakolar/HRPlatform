@@ -11,6 +11,6 @@ namespace Core.Repositories
     {
         Task<Candidate> GetCandidateByIdAsync(int id);
         Task<IList<Candidate>> GetCandidatesAsync();
-
+        Task CreateCandidateAsync(Candidate candidate);
     }
 }
