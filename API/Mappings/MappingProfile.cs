@@ -1,4 +1,4 @@
-﻿using API.ViwModels;
+﻿using API.ViewModels;
 using AutoMapper;
 using Core.Entities;
 
@@ -9,13 +9,13 @@ namespace API.Mappings
 
         public MappingProfile()
         {
-            
-            CreateMap<Candidate, CandidateViwModel>();
-            CreateMap<Skill, SkillViwModel>();
+            // domain to viewModel
+            CreateMap<Candidate, CandidateViewModel>();
+            CreateMap<Skill, SkillViewModel>();
 
-            CreateMap<CandidateViwModel, Candidate>();
-            CreateMap<SkillViwModel, Skill>();
-
+            // viewModel to domain
+            CreateMap<CandidateViewModel, Candidate>();
+            CreateMap<SkillViewModel, Skill>();
         }
 
     }

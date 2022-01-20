@@ -1,4 +1,4 @@
-﻿using API.ViwModels;
+﻿using API.ViewModels;
 using AutoMapper;
 using Core.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -22,20 +22,20 @@ namespace API.Controllers
         }
 
         [HttpGet("")]
-        public async Task<ActionResult<IList<CandidateViwModel>>> GetAllCandidatesAysinc()
+        public async Task<ActionResult<IList<CandidateViewModel>>> GetAllCandidatesAysinc()
         {
             var candidates = await _candidateService.GetCandidatesAsync();
 
-            var result = _mapper.Map<IList<CandidateViwModel>>(candidates);
+            var result = _mapper.Map<IList<CandidateViewModel>>(candidates);
 
             return Ok(result);
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<CandidateViwModel>> GetCandidateByIdAysinc(int id)
+        public async Task<ActionResult<CandidateViewModel>> GetCandidateByIdAysinc(int id)
         {
             var candidate = await _candidateService.GetCandidateAsync(id);
-            var result = _mapper.Map<CandidateViwModel>(candidate);
+            var result = _mapper.Map<CandidateViewModel>(candidate);
 
             return Ok(result);
         }

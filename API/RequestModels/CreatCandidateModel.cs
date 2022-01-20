@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace API.ViwModels
+namespace API.RequestModels
 {
-    public class CandidateViwModel
+    public class CreatCandidateModel
     {
 
         public string Name { get; set; }
@@ -12,7 +12,6 @@ namespace API.ViwModels
         public string ContactNumber { get; set; }
 
         public string Email { get; set; }
-
 
     }
 }

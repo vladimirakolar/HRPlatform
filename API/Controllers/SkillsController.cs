@@ -1,4 +1,4 @@
-﻿using API.ViwModels;
+﻿using API.ViewModels;
 using AutoMapper;
 using Core.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -21,20 +21,20 @@ namespace API.Controllers
         }
 
         [HttpGet("")]
-        public async Task<ActionResult<IList<SkillViwModel>>> GetAllSkillAysinc()
+        public async Task<ActionResult<IList<SkillViewModel>>> GetAllSkillAysinc()
         {
             var skills = await _skillService.GetSkillsAsync();
 
-            var result = _mapper.Map<IList<SkillViwModel>>(skills);
+            var result = _mapper.Map<IList<SkillViewModel>>(skills);
 
             return Ok(result);
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<SkillViwModel>> GetSkillByIdAysinc(int id)
+        public async Task<ActionResult<SkillViewModel>> GetSkillByIdAysinc(int id)
         {
             var skill = await _skillService.GetSkillAsync(id);
-            var result = _mapper.Map<SkillViwModel>(skill);
+            var result = _mapper.Map<SkillViewModel>(skill);
 
             return Ok(result);
         }
