@@ -61,5 +61,25 @@ namespace API.Controllers
 
             return Ok(candidateViewModel);
         }
+
+        [HttpDelete("id")]
+        public async Task<ActionResult> DeleteCandidateAsync(int id)
+        {
+            if (id <= 0)
+            {
+                return BadRequest();
+            }
+
+            var candidate = await _candidateService.GetCandidateAsync(id);
+
+            if (candidate == null)
+            {
+                return NotFound();
+            }
+
+            await _candidateService.DeleteCandidateAsync(candidate);
+
+            return NoContent();
+        }
     }
 }
