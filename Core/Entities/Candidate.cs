@@ -20,6 +20,6 @@ namespace Core.Entities
 
         public string Email { get; set; }
 
-        public IList<CandidateSkill> CandidateSkill { get; set; }
+        public ICollection<Skill> Skills { get; set; }
     }
 }
