@@ -24,5 +24,11 @@ namespace Data.Repositories
         {
             return await _context.Skills.ToListAsync();
         }
+
+        public async Task CreateSkillAsync(Skill skill)
+        {
+            await _context.Skills.AddAsync(skill);
+            await _context.SaveChangesAsync();
+        }
     }
 }
