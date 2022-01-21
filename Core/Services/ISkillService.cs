@@ -13,5 +13,6 @@ namespace Core.Services
         Task<IList<Skill>> GetSkillsAsync();
         Task<Skill> CreateSkillAsync(Skill skill);
         Task DeleteSkillAsync(Skill skill);
+       
     }
 }

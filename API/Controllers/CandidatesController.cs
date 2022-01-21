@@ -1,6 +1,5 @@
 ﻿using API.RequestModels;
 using API.Validators;
-using API.ViewModels;
 using AutoMapper;
 using Core.Entities;
 using Core.Services;
@@ -11,7 +10,7 @@ using System.Threading.Tasks;
 namespace API.Controllers
 {
 
-    [Route("api/[controller]")]
+    [Route("api/candedates")]
     [ApiController]
     public class CandidatesController : ControllerBase
     {
@@ -25,26 +24,54 @@ namespace API.Controllers
         }
 
         [HttpGet("")]
-        public async Task<ActionResult<IList<CandidateViewModel>>> GetAllCandidatesAysinc()
+        public async Task<ActionResult<IList<Candidate>>> GetAllCandidatesAysinc()
         {
             var candidates = await _candidateService.GetCandidatesAsync();
 
-            var result = _mapper.Map<IList<CandidateViewModel>>(candidates);
-
-            return Ok(result);
+            return Ok(candidates);
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<CandidateViewModel>> GetCandidateByIdAysinc(int id)
+        public async Task<ActionResult<Candidate>> GetCandidateByIdAysinc(int id)
         {
             var candidate = await _candidateService.GetCandidateAsync(id);
-            var result = _mapper.Map<CandidateViewModel>(candidate);
 
-            return Ok(result);
+            if (candidate == null)
+            {
+                return BadRequest("Candidate with given id is not found!");
+            }
+            
+            return Ok(candidate);
+        }
+
+        [HttpGet("searchbyname/{name}")]
+        public async Task<ActionResult<IList<Candidate>>> SearchCandidatesByNameAsync(string name)
+        {
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                return BadRequest("Name is empty");
+            }
+
+            var candidates = await _candidateService.GetCandidatesByNameAsync(name);
+
+            return Ok(candidates);
+        }
+
+        [HttpGet("searchbyskill/{skillName}")]
+        public async Task<ActionResult<IList<Candidate>>> SearchCandidatesBySkillNameAsync(string skillName)
+        {
+            if (string.IsNullOrWhiteSpace(skillName))
+            {
+                return BadRequest("Skill name is empty");
+            }
+
+            var candidates = await _candidateService.GetCandidatesBySkillAsync(skillName);
+
+            return Ok(candidates);
         }
 
         [HttpPost("")]
-        public async Task<ActionResult<CandidateViewModel>> CreateCandidateAsync([FromBody] CreateCandidateModel model)
+        public async Task<ActionResult<Candidate>> CreateCandidateAsync([FromBody] CreateCandidateModel model)
         {
             var validator = new CreateCandidateModelValidator();
             var validationResult = await validator.ValidateAsync(model);
@@ -57,10 +84,10 @@ namespace API.Controllers
 
             var newCandidate = await _candidateService.CreateCandidateAsync(candidateToCreate);
 
-            var candidateViewModel = _mapper.Map<Candidate, CandidateViewModel>(newCandidate);
-
-            return Ok(candidateViewModel);
+            return Ok(newCandidate);
         }
+
+      
 
         [HttpDelete("id")]
         public async Task<ActionResult> DeleteCandidateAsync(int id)

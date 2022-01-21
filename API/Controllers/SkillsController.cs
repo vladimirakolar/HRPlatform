@@ -1,6 +1,5 @@
 ﻿using API.RequestModels;
 using API.Validators;
-using API.ViewModels;
 using AutoMapper;
 using Core.Entities;
 using Core.Services;
@@ -10,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/skills")]
     [ApiController]
     public class SkillsController : ControllerBase
     {
@@ -24,26 +23,28 @@ namespace API.Controllers
         }
 
         [HttpGet("")]
-        public async Task<ActionResult<IList<SkillViewModel>>> GetAllSkillAysinc()
+        public async Task<ActionResult<IList<Skill>>> GetAllSkillAysinc()
         {
             var skills = await _skillService.GetSkillsAsync();
 
-            var result = _mapper.Map<IList<SkillViewModel>>(skills);
-
-            return Ok(result);
+            return Ok(skills);
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<SkillViewModel>> GetSkillByIdAysinc(int id)
+        public async Task<ActionResult<Skill>> GetSkillByIdAysinc(int id)
         {
             var skill = await _skillService.GetSkillAsync(id);
-            var result = _mapper.Map<SkillViewModel>(skill);
 
-            return Ok(result);
+            if (skill == null)
+            {
+                return BadRequest("Skill with given id is not found!");
+            }
+
+            return Ok(skill);
         }
 
         [HttpPost("")]
-        public async Task<ActionResult<SkillViewModel>> CreateSkillAsync([FromBody] CreateSkillModel model)
+        public async Task<ActionResult<Skill>> CreateSkillAsync([FromBody] CreateSkillModel model)
         {
             var validator = new CreateSkillModelValidator();
             var validationResult = await validator.ValidateAsync(model);
@@ -56,9 +57,7 @@ namespace API.Controllers
 
             var newSkill = await _skillService.CreateSkillAsync(skillToCreate);
 
-            var skillViewModel = _mapper.Map<Skill, SkillViewModel>(newSkill);
-
-            return Ok(skillViewModel);
+            return Ok(newSkill);
         }
 
         [HttpDelete("id")]
