@@ -3,6 +3,7 @@ using Core.Repositories;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Data.Repositories
@@ -45,7 +46,9 @@ namespace Data.Repositories
         public async Task<Skill> GetSkillByNameAsync(string skillName)
         {
 
-            return await _context.Skills.FirstOrDefaultAsync(s => s.Name.Contains(skillName, StringComparison.CurrentCultureIgnoreCase));              
+            return await _context.Skills
+                .Where(s => s.Name.Contains(skillName, StringComparison.CurrentCultureIgnoreCase))
+                .FirstOrDefaultAsync();              
         }
     }
 }
