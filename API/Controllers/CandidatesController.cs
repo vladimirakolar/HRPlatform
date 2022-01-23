@@ -1,16 +1,18 @@
 ﻿using API.RequestModels;
 using API.Validators;
+using API.ViewModels;
 using AutoMapper;
 using Core.Entities;
 using Core.Services;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace API.Controllers
 {
 
-    [Route("api/candedates")]
+    [Route("api/candidates")]
     [ApiController]
     public class CandidatesController : ControllerBase
     {
@@ -26,11 +28,22 @@ namespace API.Controllers
         }
 
         [HttpGet("")]
-        public async Task<ActionResult<IList<Candidate>>> GetAllCandidatesAysinc()
+        public async Task<ActionResult<CandidatesViewModel>> GetAllCandidatesAysinc()
         {
             var candidates = await _candidateService.GetCandidatesAsync();
 
-            return Ok(candidates);
+            if (candidates == null || candidates.Count == 0)
+            {
+                return NotFound("No candidates in database!");
+            }
+
+            var candidatesViewModel = new CandidatesViewModel
+            {
+                Candidates = candidates.ToList(),
+                Count = candidates.Count
+            };
+
+            return Ok(candidatesViewModel);
         }
 
         [HttpGet("{id}")]
@@ -47,7 +60,7 @@ namespace API.Controllers
         }
 
         [HttpGet("searchbyname/{name}")]
-        public async Task<ActionResult<IList<Candidate>>> SearchCandidatesByNameAsync(string name)
+        public async Task<ActionResult<CandidatesViewModel>> SearchCandidatesByNameAsync(string name)
         {
             if (string.IsNullOrWhiteSpace(name))
             {
@@ -56,11 +69,22 @@ namespace API.Controllers
 
             var candidates = await _candidateService.GetCandidatesByNameAsync(name);
 
-            return Ok(candidates);
+            if (candidates == null || candidates.Count == 0)
+            {
+                return NotFound("No candidates with given name!");
+            }
+
+            var candidatesViewModel = new CandidatesViewModel
+            {
+                Candidates = candidates.ToList(),
+                Count = candidates.Count
+            };
+
+            return Ok(candidatesViewModel);
         }
 
         [HttpGet("searchbyskill/{skillName}")]
-        public async Task<ActionResult<IList<Candidate>>> SearchCandidatesBySkillNameAsync(string skillName)
+        public async Task<ActionResult<CandidatesViewModel>> SearchCandidatesBySkillNameAsync(string skillName)
         {
             if (string.IsNullOrWhiteSpace(skillName))
             {
@@ -69,7 +93,18 @@ namespace API.Controllers
 
             var candidates = await _candidateService.GetCandidatesBySkillAsync(skillName);
 
-            return Ok(candidates);
+            if (candidates == null || candidates.Count == 0)
+            {
+                return NotFound("No candidates with given skill!");
+            }
+
+            var candidatesViewModel = new CandidatesViewModel
+            {
+                Candidates = candidates.ToList(),
+                Count = candidates.Count
+            };
+
+            return Ok(candidatesViewModel);
         }
 
         [HttpPost("")]
