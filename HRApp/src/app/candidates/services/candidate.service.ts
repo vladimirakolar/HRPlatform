@@ -22,7 +22,7 @@ export class CandidateService {
          ));
     }
 
-    getOneCandidate(id: number): Observable<Candidate> {
+    getOne(id: number): Observable<Candidate> {
         return this.http.get(`${baseUrl}/${id}`).pipe(map(response => {
           return new Candidate(response);
         }))
@@ -40,10 +40,11 @@ export class CandidateService {
         ));
     }
 
-    remove(id :number) :Observable<Candidate>{
+    removeCandidate(id :number) {
         return this.http.delete(`${baseUrl}/${id}`).pipe(map(
           response => { return new Candidate(response); }
-        ));
+          ));
+        
     }
 
 }

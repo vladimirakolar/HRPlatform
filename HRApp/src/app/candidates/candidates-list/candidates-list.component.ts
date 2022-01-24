@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Candidate } from '../model/candidate.model';
 import { CandidateService } from '../services/candidate.service';
 
@@ -8,7 +8,7 @@ import { CandidateService } from '../services/candidate.service';
   styleUrls: ['./candidates-list.component.css']
 })
 export class CandidatesListComponent implements OnInit {
-  
+
   candidates: Candidate = new Candidate();
   candidateList :Candidate[] = [];
 	count :number = 0;
@@ -18,5 +18,7 @@ export class CandidatesListComponent implements OnInit {
   ngOnInit(): void {
     
   }
+
+  
 
 }

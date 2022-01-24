@@ -17,8 +17,8 @@
             <td scope="col-2">{{c.dateOfBirth}}</td>
             <td scope="col-2">{{c.contactNumber}}</td>
             <td scope="col-2">{{c.email}}</td>
-            <td><button class="btn btn-link"><i class="fa fa-pencil fa-2x" aria-hidden="true"></i></button></td>
-            <td><button class="btn btn-link "><i class="fa fa-trash fa-2x" aria-hidden="true"></i></button></td>
+            <td><button class="btn btn-link" (click)="udateCandidate(c.id)"><i class="fa fa-pencil fa-2x" aria-hidden="true"></i></button></td>
+            <td><button class="btn btn-link" (click)="onDelete(c.id)"><i class="fa fa-trash fa-2x" aria-hidden="true"></i></button></td>
     </tr>
     </tbody>
 </table>
