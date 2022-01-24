@@ -4,6 +4,7 @@ using API.ViewModels;
 using AutoMapper;
 using Core.Entities;
 using Core.Services;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace API.Controllers
 {
-
+    [EnableCors("CorsPolicy")]
     [Route("api/candidates")]
     [ApiController]
     public class CandidatesController : ControllerBase
