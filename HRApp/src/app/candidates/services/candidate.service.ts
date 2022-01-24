@@ -41,9 +41,8 @@ export class CandidateService {
     }
 
     removeCandidate(id :number) {
-        return this.http.delete(`${baseUrl}/${id}`).pipe(map(
-          response => { return new Candidate(response); }
-          ));
+        return this.http.delete(`${baseUrl}/${id}`)
+         
         
     }
 

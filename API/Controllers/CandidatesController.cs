@@ -23,7 +23,7 @@ namespace API.Controllers
 
         public CandidatesController(ICandidateService candidateService, IMapper mapper, ISkillService skillService)
         {
-             _candidateService = candidateService;
+            _candidateService = candidateService;
             _skillService = skillService;
             _mapper = mapper;
         }
@@ -56,7 +56,7 @@ namespace API.Controllers
             {
                 return BadRequest("Candidate with given id is not found!");
             }
-            
+
             return Ok(candidate);
         }
 
@@ -126,7 +126,7 @@ namespace API.Controllers
         }
 
         [HttpPut("{candidateId}/addskill/{skillId}")]
-        public async Task<ActionResult<Candidate>> AddSkillToCandidateAsync(int candidateId, int skillId) 
+        public async Task<ActionResult<Candidate>> AddSkillToCandidateAsync(int candidateId, int skillId)
         {
             var candidate = await _candidateService.GetCandidateAsync(candidateId);
 
@@ -179,7 +179,7 @@ namespace API.Controllers
             return Ok(updateCandidate);
         }
 
-        [HttpDelete("id")]
+        [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteCandidateAsync(int id)
         {
             if (id <= 0)
